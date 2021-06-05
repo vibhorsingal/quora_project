@@ -1,0 +1,18 @@
+.wrapper{
+    display: flex;
+    justify-content: center;
+}
+
+.questions{
+    width: 40%;
+}
+
+.answer{
+    padding: 5px;
+    margin-top: 4px;
+    padding-left: 0px;
+}
+
+.body{
+    width: 100%;
+}

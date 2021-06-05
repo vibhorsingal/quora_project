@@ -1,0 +1,43 @@
+.wrapper{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#formWrapper{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 15px;
+    height: max-content;
+    width: 30%;
+    border: white solid 2px;
+    border-radius: 8px;
+}
+button{
+    width: 100%;
+}
+
+h1{
+    font-family: 'Shadows Into Light', cursive;
+}
+
+a{
+    text-decoration: none !important;
+    color: black ;
+    padding: 7px;
+}
+
+p{
+    margin: 0px;
+    padding: 3px;
+}
+
+#forget{
+    padding: 0px;
+}
+
+#register{
+    margin-top: 3px;
+    padding: 0px;
+}
