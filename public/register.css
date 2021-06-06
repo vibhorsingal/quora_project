@@ -21,3 +21,19 @@ button{
 h1{
     font-family: 'Shadows Into Light', cursive;
 }
+
+a{
+    text-decoration: none !important;
+    color: black ;
+    padding: 7px;
+}
+
+p{
+    margin: 0px;
+    padding: 3px;
+}
+
+#login{
+    margin-top: 3px;
+    padding: 0px;
+}

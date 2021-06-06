@@ -25,7 +25,7 @@ const passportGoogle=require('./config/passport_google')
 app.use(passport.initialize())
 app.use(passport.session())
 
-const loginRoute = require('./routes/loginRoute')
+const authRoute = require('./routes/authRoute')
 const questionsRoute= require('./routes/questionsRoute')
 //configuring database
 require('./config/database')
@@ -36,8 +36,8 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
 //loading the routes
-app.use('/', loginRoute)
-app.use('/query',questionsRoute)
+app.use('/auth', authRoute)
+app.use('/',questionsRoute)
 //server listening on port 5000
 app.listen(5000, () => {
     console.log(`server started at http://localhost:5000`)

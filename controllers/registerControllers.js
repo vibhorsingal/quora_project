@@ -13,6 +13,7 @@ module.exports.registerController = async (req, res) => {
         const user = await Users.findOne({ email: email })
         if(user){
             //check for unique email
+            //TODO
         }
         const salt=await bcrypt.genSalt(10)
         const hash=await bcrypt.hash(password,salt)
