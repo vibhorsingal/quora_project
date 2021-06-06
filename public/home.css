@@ -1,10 +1,17 @@
 .wrapper{
     display: flex;
     justify-content: center;
+    margin-top: 4px;
+    height: fit-content;
 }
 
 .questions{
     width: 40%;
+}
+
+#questionWrapper{
+    margin-top: 10px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
 }
 
 .answer{
@@ -16,3 +23,22 @@
 .body{
     width: 100%;
 }
+
+.title{
+    width: 100%;
+    background: rgb(223, 221, 221);
+    padding: 6px;
+}
+p{
+    margin: 0px;
+}
+
+form{
+    padding: 5px;
+    
+}
+
+#answerWrapper{
+    border: 0px;
+}
+

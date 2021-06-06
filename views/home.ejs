@@ -13,48 +13,65 @@
     <script src="https://code.jquery.com/jquery-3.2.1.js" crossorigin="anonymous"></script>
     <script src="/scripts/home.js"></script>
     <link rel="stylesheet" href="/home.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+        integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <title>Document</title>
 </head>
 
 <body>
     <%- include ('./partials/navbar') %>
-    <div class="wrapper">
-        <div class="questions">
-            <% questions.forEach(function(question){ %>
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            by:- <%= question.userId.name %>
-                        </h5>
-                        <p class="card-text">
-                            <%= question.questionBody %>
-                        </p>
-                        <button id="answerButton" class="btn btn-danger">Answer</button>
-                        <!-- answering  -->
-                        <div class="answer visually-hidden text-center" id="answer">
-                            <form action="/query/answer" method="POST">
-                                <div class="mb-3">
-                                    <textarea name="ansBody" class="body"></textarea>
+        <div class="wrapper">
+            <div class="questions">
+                <% questions.forEach(function(question){ %>
+                    <div class="card" id="questionWrapper">
+                        <div class="card-body">
+                            <div class="title">
+                                <%= question.userId.name %>
+                            </div>
+                            <!-- <h6 class="card-title"><%= question.userId.name %></h6> -->
+                            <p class="card-text mb-2">
+                                <%= question.questionBody %>
+                            </p>
+                            <button id="answerButton/<%= question.id %>"
+                                class="btn btn-sm btn-outline-secondary answerButton" value="0"><i
+                                    class="far fa-edit"></i>Answer</button>
+                            <!-- answering  -->
+                            <div class="answer visually-hidden text-center" id="answer/<%= question.id %>">
+                                <div class="card" id="answerWrapper">
+                                    <form action="/query/answer" method="POST">
+                                        <div class="mb-1">
+                                            <textarea name="ansBody" class="body" required></textarea>
+                                        </div>
+                                        <input type="text" name="postId" value="<%= question.id %>"
+                                            class="visually-hidden">
+                                        <div class="mb-1">
+                                            <button id="post" class="btn btn-outline-warning btn-sm"
+                                                type="submit">Post</button>
+                                        </div>
+                                    </form>
                                 </div>
-                                <input type="text" name="postId" value="<%= question.id %>" class="visually-hidden">
-                                <div class="mb-3">
-                                    <button id="post" class="btn btn-danger" type="submit">Post</button>
-                                </div>
-                            </form>
+                            </div>
+                            <!-- all answers -->
+                            <% (question.answers).forEach(function(answer){ %>
+                                <p>
+                                    <%= answer.answerBody %>
+                                </p>
+                                <!-- <div>
+                                    <span><i class="far fa-thumbs-up"></i>
+                                        <%= answer.upvotes %>
+                                    </span>
+                                    <span> <i class="far fa-thumbs-down"></i>
+                                        <%= answer.downvotes %>
+                                    </span>
+                                </div> -->
+                                <% }); %>
+
                         </div>
-                        <h6></h6>
-                        <!-- all answers -->
-                        <% (question.answers).forEach(function(answer){ %>
-                            <p><%= answer.answerBody %></p>
-                            <% }); %>
-
                     </div>
-                </div>
-            <% }); %>
+                    <% }); %>
 
+            </div>
         </div>
-    </div>
-    <%- include ('./partials/footer') %>
 </body>
 
 </html>
