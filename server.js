@@ -27,6 +27,7 @@ app.use(passport.session())
 
 const authRoute = require('./routes/authRoute')
 const questionsRoute= require('./routes/questionsRoute')
+const profileRoute=require('./routes/profileRoute')
 //configuring database
 require('./config/database')
 
@@ -38,6 +39,7 @@ app.use(express.urlencoded({ extended: false }))
 //loading the routes
 app.use('/auth', authRoute)
 app.use('/',questionsRoute)
+app.use('/user',profileRoute)
 //server listening on port 5000
 app.listen(5000, () => {
     console.log(`server started at http://localhost:5000`)

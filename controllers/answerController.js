@@ -23,7 +23,7 @@ module.exports.answerQuestion=async (req,res)=>{
         user.answers.push(answer)
         await user.save()
         // console.log(user,question,answer)
-        res.send(user)
+        res.redirect('/')
     }
     catch(err){
         console.log(err)

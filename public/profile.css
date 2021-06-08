@@ -1,0 +1,31 @@
+.navWrapper{
+    display: flex;
+    justify-content: center;
+    margin-top: 4px;
+    height: fit-content;
+    margin-bottom: 15px;
+    padding: 5px;
+}
+
+.nav .nav-item{
+    margin-right: 5px;
+}
+
+.custom{
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.wrapper{
+    width: 60%;
+    height: max-content;
+}
+
+form{
+    padding: 8px ;
+}
+
+.body{
+    margin-top: 10px;
+}

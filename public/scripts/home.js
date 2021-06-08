@@ -1,4 +1,5 @@
 $(()=>{
+    
     $('.answerButton').click((e)=>{
         // console.log(e.target)
         const id=e.target.getAttribute('id').split("/")[1]

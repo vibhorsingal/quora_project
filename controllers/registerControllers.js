@@ -23,7 +23,7 @@ module.exports.registerController = async (req, res) => {
             password:hash
         })
         await newUser.save()
-        res.redirect('/login')
+        res.redirect('/auth/login')
     }
     catch (err) {
         console.log(err)

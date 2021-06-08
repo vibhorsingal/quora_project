@@ -1,0 +1,15 @@
+<% user.questionsAsked.forEach(function(question){ %>
+    <div class="card" id="questionWrapper">
+        <div class="card-body">
+            <p class="card-text mb-2">
+                <%= question.questionBody %>
+            </p>
+            <% (question.answers).forEach(function(answer){ %>
+                <p>
+                    <%= answer.answerBody %>
+                </p>
+            <% }); %>
+
+        </div>
+    </div>
+<% }); %>

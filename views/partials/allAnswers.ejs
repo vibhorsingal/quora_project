@@ -1,0 +1,13 @@
+<% user.answers.forEach(function(answer){ %>
+    <div class="card" id="questionWrapper">
+        <div class="card-body">
+            <p class="card-text mb-2">
+                <%= answer.questionId.questionBody %>
+            </p>
+            <p>
+                <%= answer.answerBody %>
+            </p>
+
+        </div>
+    </div>
+<% }); %>
