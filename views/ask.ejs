@@ -12,7 +12,9 @@
         integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.2.1.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/askQuestion.css">
+    <script src="/scripts/ask.js"></script>
     <title>Document</title>
 </head>
 
@@ -20,13 +22,13 @@
     <%- include ('./partials/navbar') %>
         <div class="wrapper">
             <div class="formWrapper text-center">
-                <form action="/query/ask" method="POST">
+                <form>
                     <h1>Ask A Question</h1>
                     <div class="mb-3">
                         <textarea type="text" class="form-control" id="question" name="body"
                             placeholder="Ask Your Question....." required></textarea>
                     </div>
-                    <button type="submit" class="btn btn-secondary">Submit</button>
+                    <button id="submit" class="btn btn-secondary">Post Question</button>
                 </form>
             </div>
         </div>

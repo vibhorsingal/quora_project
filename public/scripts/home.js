@@ -7,7 +7,7 @@ $(()=>{
         const answer=`answer/${id}`
         const button=document.getElementById(answerButton)
         const card=document.getElementById(answer)
-        console.log(card)
+        // console.log(card)
         card.classList.toggle('visually-hidden')
         if(button.getAttribute('value')=="0"){
             
@@ -18,4 +18,5 @@ $(()=>{
             button.setAttribute("value","0")
         }
     })
+    
 })

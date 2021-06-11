@@ -22,8 +22,14 @@ module.exports.registerController = async (req, res) => {
             email:email,
             password:hash
         })
-        await newUser.save()
-        res.redirect('/auth/login')
+        Users.uploadAvatar(req,res,(err)=>{
+            if(err){
+                console.log(err)
+            }
+            newUser.avatar= Users.avatarPath + '/' + 'default'
+            newUser.save()
+            return res.redirect('/auth/login')  
+        })
     }
     catch (err) {
         console.log(err)

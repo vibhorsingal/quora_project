@@ -32,9 +32,10 @@ const profileRoute=require('./routes/profileRoute')
 require('./config/database')
 
 app.use('/', express.static(__dirname + '/public'))
+app.use('/uploads',express.static(__dirname+ '/uploads'))
 app.set('view engine', 'ejs')
 app.use(express.json())
-app.use(express.urlencoded({ extended: false }))
+app.use(express.urlencoded({ extended: true }))
 
 //loading the routes
 app.use('/auth', authRoute)

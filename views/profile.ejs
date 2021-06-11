@@ -24,7 +24,9 @@
     <div class="navWrapper text-center">
         <ul class="nav">
             <li class="nav-item">
-                <button class="btn btn-outline-secondary" id="editProfile"><%= user.name %></button>
+                <button class="btn btn-outline-secondary" id="editProfile">
+                    <%= user.name %>
+                </button>
             </li>
             <li class="nav-item">
                 <button class="btn btn-outline-secondary" id="questions">Questions(<%= user.questionsAsked.length %>)</button>
@@ -35,23 +37,24 @@
         </ul>
     </div>
     <div class="custom">
-        <div class="wrapper"> <%- include ('./partials/editProfile') %> </div>
+        <div class="wrapper">
+            <%- include ('./partials/editProfile') %>
+        </div>
     </div>
     <script>
-        $('#editProfile').click(()=>{
-            $('.wrapper').empty() 
+        $('#editProfile').click(() => {
+            $('.wrapper').empty()
             $('.wrapper').append(`<%- include ('./partials/editProfile') %>`)
         })
-        $('#questions').click(()=>{
+        $('#questions').click(() => {
             $('.wrapper').empty()
             $('.wrapper').append(`<%- include ('./partials/allQuestions') %>`)
-        }) 
-        $('#answers').click(()=>{
+        })
+        $('#answers').click(() => {
             $('.wrapper').empty()
             $('.wrapper').append(`<%- include ('./partials/allAnswers') %>`)
         }) 
-        
-    </script>
+    </script>       
 </body>
 
 </html>

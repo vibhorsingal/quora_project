@@ -1,18 +1,16 @@
 const Questions = require('../models/questions')
 const Users = require('../models/users')
-
 //rendering home page
 module.exports.showHomePage = async (req, res) => {
     //most answered questions 
     try{
         var questions;
         if(req.user){
-            questions = await Questions.find({ userId:{ $ne:req.user.id }}).limit(10).sort({ answers: -1 }).populate('answers').populate('userId')
+            questions = await Questions.find({ userId:{ $ne:req.user.id }}).sort({ createdAt: -1 }).populate('answers').populate('userId')
         }
         else{
-            questions = await Questions.find({}).limit(10).sort({ answers: -1 }).populate('answers').populate('userId')
+            questions = await Questions.find({}).sort({ createdAt: -1 }).populate('answers').populate('userId')
         }
-        // console.log(questions)
         if(req.user){
             return res.render('home',{
                 user:req.user.name,
@@ -45,7 +43,7 @@ module.exports.askQuestion = async (req, res) => {
         user.questionsAsked.push(query.id)
         await user.save()
 
-        res.redirect('/')
+        res.send(query)
     }
     catch(err){
         console.log(err)
@@ -54,7 +52,13 @@ module.exports.askQuestion = async (req, res) => {
 
 //rendering form to ask new question
 module.exports.showAskQuestion= (req,res)=>{
-    res.render('ask',{
-        name:req.user.name
-    })
+    if(req.user){
+        return res.render('ask',{
+            name:req.user.name
+        })
+    }
+    else{
+        return res.redirect('/auth/login')
+    }
+    
 }

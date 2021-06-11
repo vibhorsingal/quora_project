@@ -15,13 +15,14 @@ passport.use(new GoogleStrategy({
             return done(null, user)
         }
         else {
-            console.log(profile.id)
+            console.log(profile)
             const salt=await bcrypt.genSalt(10)
             const randomPassword= await bcrypt.hash(Math.random().toString(36).substring(2,7),salt)
             const newUser = new Users({
                 email:profile.emails[0].value,
                 name: profile.displayName,
-                password: randomPassword
+                password: randomPassword,
+                avatar: profile.photos[0].value
             })
             await newUser.save()
             console.log(newUser)

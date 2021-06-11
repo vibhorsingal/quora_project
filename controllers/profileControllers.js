@@ -14,9 +14,20 @@ module.exports.getProfile = async (req, res) => {
 
 module.exports.editProfile = async (req, res) => {
     try{
-        const user = await Users.findByIdAndUpdate(req.user.id, { name: req.body.newName })
-        await user.save()
-        res.redirect('/user/profile')    
+        const user = await Users.findById(req.user.id)
+        Users.uploadAvatar(req,res,(err)=>{
+            if(err){
+                console.log(err)
+            }
+            user.name=req.body.newName
+            if(req.file){
+                console.log(req.file.filename)
+                user.avatar= Users.avatarPath + '/' + req.file.filename
+            }
+            user.save()
+            return res.redirect('/auth/login')  
+        })
+          
     }
     catch(err){
         console.log(err)

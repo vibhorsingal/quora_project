@@ -4,6 +4,7 @@
     margin-top: 4px;
     height: fit-content;
     margin-bottom: 15px;
+    overflow: hidden;
 }
 
 .questions{
@@ -43,3 +44,10 @@ form{
     border: 0px;
 }
 
+#navbar{
+
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 3;
+}
