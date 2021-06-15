@@ -1,0 +1,40 @@
+.wrapper{
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.questionWrapper{
+    width: 45%;
+    border: solid 2px white;
+    padding: 8px;
+}
+
+.answerWrapper{
+    margin-top: 5px;
+    padding: 5px;
+    border-bottom: 1px solid rgb(34, 31, 31);
+
+}
+
+a{
+    text-decoration: none;
+    color: black;  
+}
+
+a:hover{
+    color: rgb(41, 40, 40);
+}
+
+#votes{
+    padding: 5px;
+    padding-left: 0px;
+}
+
+#navbar{
+
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 3;
+}

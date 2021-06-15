@@ -10,16 +10,14 @@ const answersSchema=new Schema({
         type:Schema.Types.ObjectId,
         ref:'Questions'
     },
-    upvotes:{
-        type:Number,
-        required:true,
-        default:0
-    },
-    downvotes:{
-        type:Number,
-        required:true,
-        default:0
-    },
+    upvotes:[{
+        type:Schema.Types.ObjectId,
+        ref:'Users',
+    }],
+    downvotes:[{
+        type:Schema.Types.ObjectId,
+        ref:'Users'
+    }],
     answerBody:{
         type:String,
         required:true,

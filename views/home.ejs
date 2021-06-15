@@ -19,14 +19,22 @@
 </head>
 
 <body>
-    <div id="navbar"><%- include ('./partials/navbar') %></div>
+    <div id="navbar">
+        <%- include ('./partials/navbar') %>
+    </div>
     <div class="wrapper">
         <div class="questions">
             <% questions.forEach(function(question){ %>
                 <div class="card" id="questionWrapper">
                     <div class="card-body">
-                        <div class="title"><%= question.userId.name %></div>
-                        <p class="card-text mb-2"><%= question.questionBody %></p>
+                        <div class="title"><a href="/user/profile/<%=question.userId.id%>">
+                                <%= question.userId.name %>
+                            </a></div>
+                        <p class="card-text mb-2"><b>
+                                <a href="/question/<%= question.id %>">
+                                    <%= question.questionBody %>
+                                </a>
+                            </b></p>
                         <button id="answerButton/<%= question.id %>"
                             class="btn btn-sm btn-outline-secondary answerButton" value="0"><i
                                 class="far fa-edit"></i>Answer</button>
@@ -37,8 +45,7 @@
                                     <div class="mb-1">
                                         <textarea name="ansBody" class="body" required></textarea>
                                     </div>
-                                    <input type="text" name="postId" value="<%= question.id %>"
-                                        class="visually-hidden">
+                                    <input type="text" name="postId" value="<%= question.id %>" class="visually-hidden">
                                     <div class="mb-1">
                                         <button id="post" class="btn btn-outline-warning btn-sm"
                                             type="submit">Post</button>
@@ -48,24 +55,33 @@
                         </div>
                         <!-- answer -->
                         <% (question.answers).forEach(function(answer){ %>
-                            <p><%= answer.answerBody %></p>
-                            <% }); %>
+                            <p class="otherAnswers">
+                                <%= answer.answerBody %>
+                            </p>
+                            <div id="votes">
+                                <i aid="<%= answer.id %>" class="up far fa-thumbs-up"></i><span
+                                    id="votes/<%=answer.id%>">
+                                    <%= answer.upvotes.length-answer.downvotes.length %>
+                                </span> <i aid="<%= answer.id %>" class="down far fa-thumbs-down"></i>
+                            </div>
 
+                            <% }); %>
                     </div>
                 </div>
-            <% }); %>
+                <% }); %>
         </div>
     </div>
 
 
 
     <script>
-        if('<%=user%>'==="Login"){
+        if ('<%=user%>' === "Login") {
+            $('.answerButton').addClass('visually-hidden')
             $('#navbar .navbar .dropdown').append(`
                 <a class='btn btn-secondary' href='/auth/login'>Login</a>
             `)
         }
-        else{
+        else {
             $('#navbar .navbar .dropdown').append(`
             <button class="btn btn-secondary dropdown" id="profile" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                <%= user %>

@@ -6,11 +6,33 @@ module.exports.showHomePage = async (req, res) => {
     try{
         var questions;
         if(req.user){
-            questions = await Questions.find({ userId:{ $ne:req.user.id }}).sort({ createdAt: -1 }).populate('answers').populate('userId')
+            questions = await Questions.
+            find({ userId:{ $ne:req.user.id }}).
+            sort({ createdAt: -1 }).
+            populate({
+                path:'answers',
+                options:{
+                    sort:'-upvotes'
+                },
+                perDocumentLimit:1
+                
+            }).
+            populate('userId')
         }
         else{
-            questions = await Questions.find({}).sort({ createdAt: -1 }).populate('answers').populate('userId')
+            questions = await Questions.find({}).
+            sort({ createdAt: -1 }).
+            populate({
+                path:'answers',
+                options:{
+                    sort:'-upvotes'
+                },
+                perDocumentLimit:1
+                
+            }).
+            populate('userId')
         }
+        // console.log(questions)
         if(req.user){
             return res.render('home',{
                 user:req.user.name,
@@ -61,4 +83,33 @@ module.exports.showAskQuestion= (req,res)=>{
         return res.redirect('/auth/login')
     }
     
+}
+
+//question by id
+module.exports.showQuestionById=async (req,res)=>{
+    try{
+        const question=await Questions.findById(req.params.qid).
+        populate({
+            path:'answers',
+            populate:{
+                path:'userId'
+            }
+        })
+        console.log(question)
+        if(req.user){
+            return res.render('question',{
+                user:req.user.name,
+                question:question
+            })
+        }
+        else{
+            return res.render('question',{
+                user:'Login',
+                question:question
+            })
+        }
+    }
+    catch(err){
+        console.log(err)
+    }
 }
