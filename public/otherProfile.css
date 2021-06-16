@@ -1,0 +1,60 @@
+.profile {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  padding: 5px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.name {
+  display: flex;
+  align-items: center;
+}
+
+.navWrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.nav .nav-item {
+  margin-right: 5px;
+}
+
+.custom {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.wrapper {
+  width: 40%;
+  height: max-content;
+}
+
+.followersWrapper {
+  width: 40%;
+}
+
+.followerName {
+  padding: 4px;
+  padding-left: 12px;
+}
+
+.followingWrapper {
+  width: 40%;
+}
+
+.followingName {
+  padding: 4px;
+  padding-left: 12px;
+}
+
+a {
+  color: rgb(17, 17, 17);
+  text-decoration: none;
+}
+
+a:hover {
+  color: slategray;
+}

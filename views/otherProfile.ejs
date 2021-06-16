@@ -2,18 +2,19 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
         crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous" />
     <script src="https://code.jquery.com/jquery-3.2.1.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="/profile.css">
+    <link rel="stylesheet" href="/otherProfile.css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
-        integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+        integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous" />
+    <script src="/scripts/profile.js"></script>
     <title>Profile</title>
 </head>
 
@@ -21,39 +22,60 @@
     <div id="navbar">
         <%- include ('./partials/profileNavbar') %>
     </div>
+    <div class="profile">
+        <h5 class="name">
+            <span>
+                <%= user.name %>
+            </span>
+        </h5>
+        <button class="btn btn-outline-danger" id="follow" aid="<%= user.id %>">
+            <%= status %>
+        </button>
+    </div>
     <div class="navWrapper text-center">
         <ul class="nav">
             <li class="nav-item">
-                <button class="btn btn-outline-secondary" id="follow"><a href="/user/profile/follow/<%= user.id %>">
-                        Follow
-                    </a></button>
+                <button class="btn btn-outline-secondary" id="questions">
+                    Questions (<%= user.questionsAsked.length %>)
+                </button>
             </li>
             <li class="nav-item">
-                <button class="btn btn-outline-secondary" id="questions">Questions(<%= user.questionsAsked.length %>
-                        )</button>
+                <button class="btn btn-outline-secondary" id="answers">
+                    Answers (<%= user.answers.length %>)
+                </button>
             </li>
             <li class="nav-item">
-                <button class="btn btn-outline-secondary" id="answers">Answers (<%= user.answers.length %>) </button>
+                <button class="btn btn-outline-secondary" id="followers">
+                    Followers (<%= user.followers.length %>)
+                </button>
+            </li>
+            <li class="nav-item">
+                <button class="btn btn-outline-secondary" id="following">
+                    Following (<%= user.following.length %>)
+                </button>
             </li>
         </ul>
     </div>
     <div class="custom">
-        <div class="wrapper">
-
-        </div>
+        <div class="wrapper"></div>
     </div>
     <script>
-        $('#editProfile').click(() => {
-            $('.wrapper').empty()
-        })
-        $('#questions').click(() => {
-            $('.wrapper').empty()
-            $('.wrapper').append(`<%- include ('./partials/allQuestions') %>`)
-        })
-        $('#answers').click(() => {
-            $('.wrapper').empty()
-            $('.wrapper').append(`<%- include ('./partials/allAnswers') %>`)
-        })
+        $("#questions").click(() => {
+            $(".wrapper").empty();
+            $(".wrapper").append(`<%- include ('./partials/allQuestions') %>`);
+        });
+        $("#answers").click(() => {
+            $(".wrapper").empty();
+            $(".wrapper").append(`<%- include ('./partials/allAnswers') %>`);
+        });
+        $("#followers").click(() => {
+            $(".wrapper").empty();
+            $(".wrapper").append(`<%- include ('./partials/allFollowers') %>`);
+        });
+        $("#following").click(() => {
+            $(".wrapper").empty();
+            $(".wrapper").append(`<%- include ('./partials/allFollowing') %>`);
+        });
     </script>
 </body>
 

@@ -25,11 +25,10 @@ $(() => {
         $.get(`/answer/upvote/${aid}`, (res) => {
             if (res) {
                 var span = document.getElementById(`votes/${aid}`)
-                console.log(span)
                 span.innerText = res.upvotes.length - res.downvotes.length
             }
             else {
-                console.log('hello')
+                location.href = '/auth/login'
             }
 
         })
@@ -39,9 +38,13 @@ $(() => {
         const aid = e.target.getAttribute('aid')
         console.log(e.target)
         $.get(`/answer/downvote/${aid}`, (res) => {
-            var span = document.getElementById(`votes/${aid}`)
-            console.log(span)
-            span.innerText = res.upvotes.length - res.downvotes.length
+            if (res) {
+                var span = document.getElementById(`votes/${aid}`)
+                span.innerText = res.upvotes.length - res.downvotes.length
+            }
+            else {
+                location.href = '/auth/login'
+            }
         })
     })
 

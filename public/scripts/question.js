@@ -1,11 +1,16 @@
 $(() => {
     $('.up').click((e) => {
         const aid = e.target.getAttribute('aid')
-        console.log(e.target)
+        // console.log(e.target)
         $.get(`/answer/upvote/${aid}`, (res) => {
-            e.target.innerText = res.upvotes
-            e.target.classList.remove("far")
-            e.target.classList.add("fas")
+            if (res) {
+                var span = document.getElementById(`votes/${aid}`)
+                span.innerText = res.upvotes.length - res.downvotes.length
+            }
+            else {
+                location.href = '/auth/login'
+            }
+
         })
     })
 
@@ -13,7 +18,13 @@ $(() => {
         const aid = e.target.getAttribute('aid')
         console.log(e.target)
         $.get(`/answer/downvote/${aid}`, (res) => {
-            e.target.innerText = res.downvotes
+            if (res) {
+                var span = document.getElementById(`votes/${aid}`)
+                span.innerText = res.upvotes.length - res.downvotes.length
+            }
+            else {
+                location.href = '/auth/login'
+            }
         })
     })
 })

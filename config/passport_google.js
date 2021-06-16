@@ -15,11 +15,10 @@ passport.use(new GoogleStrategy({
             return done(null, user)
         }
         else {
-            console.log(profile)
-            const salt=await bcrypt.genSalt(10)
-            const randomPassword= await bcrypt.hash(Math.random().toString(36).substring(2,7),salt)
+            const salt = await bcrypt.genSalt(10)
+            const randomPassword = await bcrypt.hash(Math.random().toString(36).substring(2, 7), salt)
             const newUser = new Users({
-                email:profile.emails[0].value,
+                email: profile.emails[0].value,
                 name: profile.displayName,
                 password: randomPassword,
                 avatar: profile.photos[0].value
@@ -41,4 +40,4 @@ passport.deserializeUser(function (id, done) {
     });
 });
 
-module.exports=passport
+module.exports = passport

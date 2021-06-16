@@ -1,0 +1,7 @@
+<% user.followers.forEach(function(follower){ %>
+    <div class="followersWrapper">
+        <h6 class="followerName"><a href="/user/profile/<%=follower.id%>">
+                <%= follower.name %>
+            </a></h6>
+    </div>
+    <% }); %>

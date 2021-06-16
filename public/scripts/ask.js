@@ -1,13 +1,15 @@
-$(()=>{
-    
+$(() => {
 
-    $('#submit').click((event)=>{
+
+    $('#submit').click((event) => {
         event.preventDefault()
-        const question=$('#question').val()
-        $.post('/query/ask',{
-            body:question
-        },(response)=>{
-            console.log(response)
+        const question = $('#question').val()
+        $.post('/query/ask', {
+            body: question
+        }, (response) => {
+            if (response) {
+                location.href = '/'
+            }
         })
 
     })
