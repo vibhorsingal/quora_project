@@ -5,6 +5,7 @@
   padding: 5px;
   margin-top: 8px;
   margin-bottom: 8px;
+  align-items: center;
 }
 
 .name {
@@ -28,7 +29,8 @@
 }
 
 .wrapper {
-  width: 40%;
+  margin-top: 10px;
+  width: 35%;
   height: max-content;
 }
 
@@ -57,4 +59,12 @@ a {
 
 a:hover {
   color: slategray;
+}
+
+#follow {
+  height: max-content;
+}
+
+img {
+  margin-right: 4px;
 }

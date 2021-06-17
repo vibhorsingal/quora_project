@@ -27,6 +27,21 @@
             <h4>
                 <%=question.questionBody%>
             </h4>
+            <button id="answerButton" class="btn btn-sm btn-outline-secondary answerButton"><i
+                    class="far fa-edit"></i>Answer</button>
+            <div class="answer visually-hidden text-center" id="answer/<%= question.id %>">
+                <div class="card" id="answerWrapper">
+                    <form action="/query/answer" method="POST">
+                        <div class="mb-1">
+                            <textarea name="ansBody" class="body" rows="3" required></textarea>
+                        </div>
+                        <input type="text" name="postId" value="<%= question.id %>" class="visually-hidden">
+                        <div class="mb-1">
+                            <button id="post" class="btn btn-outline-warning btn-sm" type="submit">Post</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
             <hr>
             <p>
                 <%=question.answers.length %> Answers
@@ -70,6 +85,10 @@
               <li><a class="dropdown-item" href="/auth/logout">Logout</a></li>
             </ul>
             `)
+
+            $('.answerButton').click(() => {
+                $('.answer').toggleClass('visually-hidden')
+            })
         }
     </script>
 </body>

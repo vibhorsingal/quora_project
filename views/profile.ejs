@@ -29,10 +29,21 @@
                 </button>
             </li>
             <li class="nav-item">
-                <button class="btn btn-outline-secondary" id="questions">Questions(<%= user.questionsAsked.length %>)</button>
+                <button class="btn btn-outline-secondary" id="questions">Questions(<%= user.questionsAsked.length %>
+                        )</button>
             </li>
             <li class="nav-item">
                 <button class="btn btn-outline-secondary" id="answers">Answers (<%= user.answers.length %>) </button>
+            </li>
+            <li class="nav-item">
+                <button class="btn btn-outline-secondary" id="followers">
+                    Followers (<%= user.followers.length %>)
+                </button>
+            </li>
+            <li class="nav-item">
+                <button class="btn btn-outline-secondary" id="following">
+                    Following (<%= user.following.length %>)
+                </button>
             </li>
         </ul>
     </div>
@@ -53,8 +64,16 @@
         $('#answers').click(() => {
             $('.wrapper').empty()
             $('.wrapper').append(`<%- include ('./partials/allAnswers') %>`)
-        }) 
-    </script>       
+        })
+        $("#followers").click(() => {
+            $(".wrapper").empty();
+            $(".wrapper").append(`<%- include ('./partials/allFollowers') %>`);
+        });
+        $("#following").click(() => {
+            $(".wrapper").empty();
+            $(".wrapper").append(`<%- include ('./partials/allFollowing') %>`);
+        });
+    </script>
 </body>
 
 </html>

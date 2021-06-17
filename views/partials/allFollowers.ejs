@@ -1,7 +1,10 @@
 <% user.followers.forEach(function(follower){ %>
     <div class="followersWrapper">
-        <h6 class="followerName"><a href="/user/profile/<%=follower.id%>">
+        <h6 class="followerName">
+            <img src="<%= follower.avatar %>" alt="avatar" style="height: 30px; width: 30px; border-radius: 50%;">
+            <a href="/user/profile/<%=follower.id%>">
                 <%= follower.name %>
-            </a></h6>
+            </a>
+        </h6>
     </div>
     <% }); %>

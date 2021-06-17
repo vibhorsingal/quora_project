@@ -5,7 +5,9 @@ module.exports.getProfile = async (req, res) => {
     try {
         const user = await Users.findById(req.user.id)
             .populate({ path: "questionsAsked", populate: { path: "answers" } })
-            .populate({ path: "answers", populate: { path: "questionId" } });
+            .populate({ path: "answers", populate: { path: "questionId" } })
+            .populate('followers')
+            .populate('following')
         res.render("profile", {
             user: user,
         });
@@ -25,7 +27,6 @@ module.exports.getProfileById = async (req, res) => {
         var status = "Follow"
         if (req.user) {
             var present = user.followers.find(follower => {
-                console.log(follower)
                 return follower.id === req.user.id
             })
             if (present) {
@@ -53,7 +54,9 @@ module.exports.editProfile = async (req, res) => {
             user.name = req.body.newName;
             if (req.file) {
                 console.log(req.file.filename);
-                user.avatar = Users.avatarPath + "/" + req.file.filename;
+                let path = Users.avatarPath + "/" + req.file.filename;
+                user.avatar = path.replace(/\\/g, '/')
+                console.log(path)
             }
             user.save();
             return res.redirect("/auth/login");

@@ -27,10 +27,12 @@
             <% questions.forEach(function(question){ %>
                 <div class="card" id="questionWrapper">
                     <div class="card-body">
-                        <div class="title"><a href="/user/profile/<%=question.userId.id%>">
+                        <div class="title"><img src="<%= question.userId.avatar %>" alt="avatar"
+                                style="height: 30px; width: 30px; border-radius: 50%; margin-right: 2px;"><a
+                                href="/user/profile/<%=question.userId.id%>">
                                 <%= question.userId.name %>
                             </a></div>
-                        <p class="card-text mb-2"><b>
+                        <p class="card-text mb-2 questionBody"><b>
                                 <a href="/question/<%= question.id %>">
                                     <%= question.questionBody %>
                                 </a>
