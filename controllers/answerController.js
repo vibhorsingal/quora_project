@@ -40,14 +40,17 @@ module.exports.upvotingController = async (req, res) => {
             var upIndex = answer.upvotes.indexOf(userId)
             if (upIndex != -1) {
                 answer.upvotes.splice(upIndex, 1)
+                answer.netVote = answer.netVote - 1;
                 answer.save()
             }
             else {
                 var downIndex = answer.downvotes.indexOf(userId)
                 if (downIndex != -1) {
                     answer.downvotes.splice(downIndex, 1)
+                    answer.netVote = answer.netVote + 1
                 }
                 answer.upvotes.push(userId)
+                answer.netVote = answer.netVote + 1
                 answer.save()
             }
             return res.status(201).send(answer)
@@ -70,14 +73,17 @@ module.exports.downvotingController = async (req, res) => {
             var downIndex = answer.downvotes.indexOf(userId)
             if (downIndex != -1) {
                 answer.downvotes.splice(downIndex, 1)
+                answer.netVote = answer.netVote + 1
                 answer.save()
             }
             else {
                 var upIndex = answer.upvotes.indexOf(userId)
                 if (upIndex != -1) {
                     answer.upvotes.splice(upIndex, 1)
+                    answer.netVote = answer.netVote - 1
                 }
                 answer.downvotes.push(userId)
+                answer.netVote = answer.netVote - 1
                 answer.save()
             }
             return res.send(answer)

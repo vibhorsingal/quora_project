@@ -30,13 +30,14 @@
                         <div class="title"><img src="<%= question.userId.avatar %>" alt="avatar"
                                 style="height: 30px; width: 30px; border-radius: 50%; margin-right: 2px;"><a
                                 href="/user/profile/<%=question.userId.id%>">
-                                <%= question.userId.name %>
+                                <b>
+                                    <%= question.userId.name %>
+                                </b>
                             </a></div>
-                        <p class="card-text mb-2 questionBody"><b>
-                                <a href="/question/<%= question.id %>">
-                                    <%= question.questionBody %>
-                                </a>
-                            </b></p>
+
+                        <h6 class="questionBody"><a href="/question/<%= question.id %>">
+                                <%= question.questionBody %>
+                            </a></h6>
                         <button id="answerButton/<%= question.id %>"
                             class="btn btn-sm btn-outline-secondary answerButton" value="0"><i
                                 class="far fa-edit"></i>Answer</button>
@@ -57,7 +58,7 @@
                         </div>
                         <!-- answer -->
                         <% (question.answers).forEach(function(answer){ %>
-                            <p class="otherAnswers">
+                            <p class="otherAnswers" style="font-size: medium;">
                                 <%= answer.answerBody %>
                             </p>
                             <div id="votes">

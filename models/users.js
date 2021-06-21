@@ -11,35 +11,52 @@ const userSchema = new Schema({
         trim: true,
         unique: true
     },
+
     name: {
         type: String,
         required: true,
         trim: true
     },
+
     password: {
         type: String,
         required: true,
         trim: true
     },
+
     questionsAsked: [{
         type: Schema.Types.ObjectId,
         ref: 'Questions'
     }],
+
     answers: [{
         type: Schema.Types.ObjectId,
         ref: 'Answers'
     }],
+
     avatar: {
         type: String
     },
+
     followers: [{
         type: Schema.Types.ObjectId,
         ref: 'Users'
     }],
+
     following: [{
         type: Schema.Types.ObjectId,
         ref: 'Users'
+    }],
+
+    upVotes: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Vote'
+    }],
+    downVotes: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Vote'
     }]
+
 }, {
     timestamps: true
 })

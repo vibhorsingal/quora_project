@@ -2,14 +2,24 @@
     <div class="card" id="questionWrapper">
         <div class="card-body">
             <p class="card-text mb-2">
-                <%= question.questionBody %>
+                <a href="/question/<%= question.id %>">
+                    <b>
+                        <%= question.questionBody %>
+                    </b>
+                </a>
             </p>
             <% (question.answers).forEach(function(answer){ %>
                 <p>
                     <%= answer.answerBody %>
                 </p>
-            <% }); %>
+                <div id="votes">
+                    <i aid="<%= answer.id %>" class="up far fa-thumbs-up"></i><span id="votes/<%=answer.id%>">
+                        <%= answer.upvotes.length-answer.downvotes.length %>
+                    </span> <i aid="<%= answer.id %>" class="down far fa-thumbs-down"></i>
+                </div>
+
+                <% }); %>
 
         </div>
     </div>
-<% }); %>
+    <% }); %>

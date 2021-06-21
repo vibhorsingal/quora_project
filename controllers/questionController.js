@@ -3,57 +3,56 @@ const Users = require('../models/users')
 //rendering home page
 module.exports.showHomePage = async (req, res) => {
     //most answered questions 
-    try{
+    try {
         var questions;
-        if(req.user){
+        if (req.user) {
             questions = await Questions.
-            find({ userId:{ $ne:req.user.id }}).
-            sort({ createdAt: -1 }).
-            populate({
-                path:'answers',
-                options:{
-                    sort:'-upvotes'
-                },
-                perDocumentLimit:1
-                
-            }).
-            populate('userId')
+                find({ userId: { $ne: req.user.id } }).
+                sort({ createdAt: -1 }).
+                populate({
+                    path: 'answers',
+                    options: {
+                        sort: 'netVote'
+                    },
+                    perDocumentLimit: 1
+                }).
+                populate('userId')
         }
-        else{
+        else {
             questions = await Questions.find({}).
-            sort({ createdAt: -1 }).
-            populate({
-                path:'answers',
-                options:{
-                    sort:'-upvotes'
-                },
-                perDocumentLimit:1
-                
-            }).
-            populate('userId')
+                sort({ createdAt: -1 }).
+                populate({
+                    path: 'answers',
+                    options: {
+                        sort: 'netVote'
+                    },
+                    perDocumentLimit: 1
+
+                }).
+                populate('userId')
         }
         // console.log(questions)
-        if(req.user){
-            return res.render('home',{
-                user:req.user.name,
-                questions:questions
+        if (req.user) {
+            return res.render('home', {
+                user: req.user.name,
+                questions: questions
             })
         }
-        else{
-            return res.render('home',{
-                user:'Login',
-                questions:questions
+        else {
+            return res.render('home', {
+                user: 'Login',
+                questions: questions
             })
         }
     }
-    catch(err){
+    catch (err) {
         console.log(err)
     }
 }
 
 //asking a new question
 module.exports.askQuestion = async (req, res) => {
-    try{
+    try {
         const { body } = req.body
         const query = new Questions({
             userId: req.user.id,
@@ -61,55 +60,55 @@ module.exports.askQuestion = async (req, res) => {
         })
         await query.save()
         //updating user 
-        const user=await Users.findById(req.user.id)
+        const user = await Users.findById(req.user.id)
         user.questionsAsked.push(query.id)
         await user.save()
 
         res.send(query)
     }
-    catch(err){
+    catch (err) {
         console.log(err)
     }
 }
 
 //rendering form to ask new question
-module.exports.showAskQuestion= (req,res)=>{
-    if(req.user){
-        return res.render('ask',{
-            name:req.user.name
+module.exports.showAskQuestion = (req, res) => {
+    if (req.user) {
+        return res.render('ask', {
+            name: req.user.name
         })
     }
-    else{
+    else {
         return res.redirect('/auth/login')
     }
-    
+
 }
 
 //question by id
-module.exports.showQuestionById=async (req,res)=>{
-    try{
-        const question=await Questions.findById(req.params.qid).
-        populate({
-            path:'answers',
-            populate:{
-                path:'userId'
-            }
-        })
+module.exports.showQuestionById = async (req, res) => {
+    try {
+        const question = await Questions.findById(req.params.qid).
+            populate({
+                path: 'answers',
+                populate: {
+                    path: 'userId'
+                }
+            })
         console.log(question)
-        if(req.user){
-            return res.render('question',{
-                user:req.user.name,
-                question:question
+        if (req.user) {
+            return res.render('question', {
+                user: req.user.name,
+                question: question
             })
         }
-        else{
-            return res.render('question',{
-                user:'Login',
-                question:question
+        else {
+            return res.render('question', {
+                user: 'Login',
+                question: question
             })
         }
     }
-    catch(err){
+    catch (err) {
         console.log(err)
     }
 }

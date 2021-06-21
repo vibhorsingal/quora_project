@@ -45,3 +45,30 @@ img {
 .upload {
   width: 250px;
 }
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
+.followersWrapper {
+  width: 40%;
+}
+
+.followerName {
+  padding: 4px;
+  padding-left: 12px;
+}
+
+.followingWrapper {
+  width: 40%;
+}
+
+.followingName {
+  padding: 4px;
+  padding-left: 12px;
+}
+
+a:hover {
+  color: slategray;
+}

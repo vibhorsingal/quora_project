@@ -1,31 +1,31 @@
 const mongoose = require('mongoose')
 const { Schema } = mongoose
 
-const answersSchema=new Schema({
-    userId:{
-        type:Schema.Types.ObjectId,
-        ref:'Users'
+const answersSchema = new Schema({
+    userId: {
+        type: Schema.Types.ObjectId,
+        ref: 'Users'
     },
-    questionId:{
-        type:Schema.Types.ObjectId,
-        ref:'Questions'
+    questionId: {
+        type: Schema.Types.ObjectId,
+        ref: 'Questions'
     },
-    upvotes:[{
-        type:Schema.Types.ObjectId,
-        ref:'Users',
+    upvotes: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Users',
     }],
-    downvotes:[{
-        type:Schema.Types.ObjectId,
-        ref:'Users'
+    downvotes: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Users'
     }],
-    answerBody:{
-        type:String,
-        required:true,
-        trim:true
+    answerBody: {
+        type: String,
+        required: true,
+        trim: true
     }
-},{
-    timestamps:true
+}, {
+    timestamps: true
 })
 
-const Answers=new mongoose.model('Answers',answersSchema)
-module.exports=Answers
+const Answers = new mongoose.model('Answers', answersSchema)
+module.exports = Answers
