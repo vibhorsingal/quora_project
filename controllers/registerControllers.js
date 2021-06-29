@@ -3,7 +3,7 @@ const Users = require('../models/users')
 
 //show register page
 module.exports.getRegisterPage = (req, res) => {
-    res.render('register')
+    res.render('register', { message: req.flash('error') })
 }
 
 //register the user
@@ -12,8 +12,7 @@ module.exports.registerController = async (req, res) => {
         const { name, email, password } = req.body
         const user = await Users.findOne({ email: email })
         if (user) {
-            //check for unique email
-            //TODO
+            throw new Error("Email already registered")
         }
         const salt = await bcrypt.genSalt(10)
         const hash = await bcrypt.hash(password, salt)
@@ -33,6 +32,8 @@ module.exports.registerController = async (req, res) => {
         })
     }
     catch (err) {
+        req.flash('error', err.message)
         console.log(err)
+        res.redirect('/auth/register')
     }
 }

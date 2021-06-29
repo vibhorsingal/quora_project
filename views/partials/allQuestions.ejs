@@ -9,6 +9,11 @@
                 </a>
             </p>
             <% (question.answers).forEach(function(answer){ %>
+                <h6><img src="<%=answer.userId.avatar%>" alt="alt"
+                        style="height: 20px; width: 20px; border-radius: 50%;"><a
+                        href="/user/profile/<%= answer.userId%>">
+                        <%= answer.userId.name %>
+                    </a></h6>
                 <p>
                     <%= answer.answerBody %>
                 </p>

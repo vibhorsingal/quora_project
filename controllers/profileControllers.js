@@ -6,8 +6,8 @@ const path = require('path')
 module.exports.getProfile = async (req, res) => {
     try {
         const user = await Users.findById(req.user.id)
-            .populate({ path: "questionsAsked", populate: { path: "answers" } })
-            .populate({ path: "answers", populate: { path: "questionId" } })
+            .populate({ path: "questionsAsked", populate: { path: "answers", populate: { path: "userId" } } })
+            .populate({ path: "answers", populate: { path: "questionId", populate: { path: "userId" } } })
             .populate('followers')
             .populate('following')
         res.render("profile", {
@@ -28,10 +28,19 @@ module.exports.getProfileById = async (req, res) => {
                     options: {
                         sort: '-upvotes'
                     },
-                    perDocumentLimit: 1
+                    perDocumentLimit: 1,
+                    populate: {
+                        path: 'userId'
+                    }
                 }
             })
-            .populate({ path: "answers", populate: { path: "questionId" } })
+            .populate({
+                path: "answers", populate: {
+                    path: "questionId", populate: {
+                        path: 'userId'
+                    }
+                }
+            })
             .populate({ path: 'followers' })
             .populate({ path: 'following' });
         var status = "Follow"

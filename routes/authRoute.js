@@ -11,7 +11,7 @@ const { getRegisterPage, registerController } = require('../controllers/register
 
 //routes for local login
 route.get('/login', getLoginPage)
-route.post('/login' ,passport.authenticate('local', { successRedirect: '/' , failureRedirect:'/auth/login'}))
+route.post('/login', passport.authenticate('local', { successRedirect: '/', failureRedirect: '/auth/login' }))
 
 //register routes
 route.get('/register', getRegisterPage)
@@ -28,7 +28,7 @@ route.get('/google',
 
 //google authentication callback  
 route.get('/google/redirect',
-  passport.authenticate('google', { failureRedirect: '/login' }),
+  passport.authenticate('google', { failureRedirect: '/login', failureFlash: true }),
   function (req, res) {
     // Successful authentication, redirect home.
     res.redirect('/');

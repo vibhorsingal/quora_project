@@ -2,9 +2,14 @@
     <div class="card" id="questionWrapper">
         <div class="card-body">
             <p class="card-text mb-2">
-                <a href="/question/<%= answer.questionId.id %>"><b>
-                        <%= answer.questionId.questionBody %>
-                    </b></a>
+            <h6><img src="<%=answer.questionId.userId.avatar%>" alt="alt"
+                    style="height: 30px; width: 30px; border-radius: 50%;"><a
+                    href="/user/profile/<%= answer.questionId.userId%>">
+                    <%= answer.questionId.userId.name %>
+                </a></h6>
+            <a href="/question/<%= answer.questionId.id %>"><b>
+                    <%= answer.questionId.questionBody %>
+                </b></a>
             </p>
             <p>
                 <%= answer.answerBody %>

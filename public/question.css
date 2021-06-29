@@ -11,9 +11,8 @@
 }
 
 .answerWrapper {
-  margin-top: 5px;
-  padding: 5px;
-  border-bottom: 1px solid rgb(34, 31, 31);
+  margin-top: 10px;
+  padding: 15px;
 }
 
 a {
@@ -45,4 +44,22 @@ a:hover {
   margin-top: 15px;
   padding: 10px;
   border: 0px;
+}
+
+.otherAnswers {
+  margin-bottom: 2px;
+}
+
+hr {
+  margin: 8px;
+}
+
+.answerButton {
+  margin-top: 6px;
+  margin-bottom: 6px;
+}
+
+p {
+  margin: 0px;
+  padding-left: 5px;
 }

@@ -94,6 +94,9 @@ module.exports.showQuestionById = async (req, res) => {
                     path: 'userId'
                 }
             })
+            .populate({
+                path: 'userId'
+            })
         console.log(question)
         if (req.user) {
             return res.render('question', {
@@ -110,5 +113,27 @@ module.exports.showQuestionById = async (req, res) => {
     }
     catch (err) {
         console.log(err)
+    }
+}
+
+
+//delete question by id
+
+/*
+    if a question is not answered yet the person can delete it 
+*/
+
+module.exports.deleteQuestionById = async (req, res) => {
+    try {
+        const qid = req.params.qid
+        const user = await Users.findById(req.user.id)
+        let index = user.questionsAsked.indexOf(qid)
+        user.questionsAsked.splice(index, 1)
+        user.save()
+        const question = await Questions.findByIdAndDelete(qid)
+        return res.send(question)
+    }
+    catch (err) {
+        console.log(err);
     }
 }

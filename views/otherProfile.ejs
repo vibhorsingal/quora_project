@@ -19,46 +19,79 @@
 </head>
 
 <body>
-    <div id="navbar">
-        <%- include ('./partials/profileNavbar') %>
-    </div>
-    <div class="profile">
-        <h5 class="name">
-            <img src="<%= user.avatar %>" alt="avatar" style="height: 50px; width: 50px; border-radius: 50%;">
-            <span>
-                <%= user.name %>
-            </span>
-        </h5>
-        <button class="btn btn-outline-danger" id="follow" aid="<%= user.id %>">
-            <%= status %>
-        </button>
-    </div>
-    <div class="navWrapper text-center">
-        <ul class="nav">
-            <li class="nav-item">
-                <button class="btn btn-outline-secondary" id="questions">
-                    Questions (<%= user.questionsAsked.length %>)
+    <div id="main">
+        <div id="navbar">
+            <%- include ('./partials/profileNavbar') %>
+        </div>
+        <div class="profile">
+            <h4 class="name">
+                <img src="<%= user.avatar %>" alt="avatar" style="height: 70px; width: 70px; border-radius: 50%;">
+                <span>
+                    <%= user.name %>
+                </span>
+            </h4>
+            <div>
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" id="askTo">
+                    Ask Question
                 </button>
-            </li>
-            <li class="nav-item">
-                <button class="btn btn-outline-secondary" id="answers">
-                    Answers (<%= user.answers.length %>)
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title text-center" id="exampleModalLabel">Add Question</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="/question/askTo/:uid">
+                                    <textarea name="questionBody" id="" cols="62" rows="5"></textarea>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-sm btn-outline-dark"
+                                    data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-sm btn-outline-success">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-sm btn-outline-danger" id="follow" aid="<%= user.id %>">
+                    <%= status %>
                 </button>
-            </li>
-            <li class="nav-item">
-                <button class="btn btn-outline-secondary" id="followers">
-                    Followers (<%= user.followers.length %>)
-                </button>
-            </li>
-            <li class="nav-item">
-                <button class="btn btn-outline-secondary" id="following">
-                    Following (<%= user.following.length %>)
-                </button>
-            </li>
-        </ul>
-    </div>
-    <div class="custom">
-        <div class="wrapper"></div>
+            </div>
+        </div>
+        <div class="navWrapper text-center">
+            <ul class="nav">
+                <li class="nav-item">
+                    <button class="btn btn-outline-secondary" id="questions">
+                        Questions (<%= user.questionsAsked.length %>)
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="btn btn-outline-secondary" id="answers">
+                        Answers (<%= user.answers.length %>)
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="btn btn-outline-secondary" id="followers">
+                        Followers (<%= user.followers.length %>)
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="btn btn-outline-secondary" id="following">
+                        Following (<%= user.following.length %>)
+                    </button>
+                </li>
+            </ul>
+        </div>
+        <div class="custom">
+            <div class="wrapper">
+                <%- include ('./partials/allQuestions') %>
+            </div>
+        </div>
     </div>
     <script>
         $("#questions").click(() => {

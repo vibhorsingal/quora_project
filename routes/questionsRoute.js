@@ -1,7 +1,7 @@
 const route = require('express').Router()
 // const Questions = require('../models/questions')
 //controllers 
-const { showAskQuestion, askQuestion, showHomePage, showQuestionById } = require('../controllers/questionController')
+const { showAskQuestion, askQuestion, showHomePage, showQuestionById, deleteQuestionById } = require('../controllers/questionController')
 const { answerQuestion, upvotingController, downvotingController } = require('../controllers/answerController')
 
 //home page route
@@ -25,5 +25,7 @@ route.get('/answer/upvote/:aid', upvotingController)
 //downvote
 route.get('/answer/downvote/:aid', downvotingController)
 
+//delete a question by id
+route.get('/question/delete/:qid', deleteQuestionById)
 //exporting
 module.exports = route

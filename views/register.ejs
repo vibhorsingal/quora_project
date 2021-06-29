@@ -25,7 +25,13 @@
         <div class="formWrapper">
             <form action="/auth/register" method="POST">
                 <h1 class="text-center">Register</h1>
-
+                <div class="mb-1">
+                    <% if(message && message.length){ %>
+                        <p style="color: red;">
+                            <%= message %>
+                        </p>
+                        <% } %>
+                </div>
                 <div class="mb-3">
                     <label for="name" class="form-label"> Your Name</label>
                     <input type="text" class="form-control" id="name" name="name" required>
@@ -44,8 +50,9 @@
                 <p class="text-center"> <small> <b>OR</b></small></p>
                 <p class="text-center"><a href="/auth/google"><button type="button"
                             style="background:#e0e5ec; color:rgb(12, 0, 0); border:none; width:200px; height:40px; border-radius:3%;"><img
-                                src="https://www.iconfinder.com/data/icons/social-media-2210/24/Google-512.png"
-                                style="width:30px; background:white; border-radius:50%;" alt=""> Sign In With
+                                src="https://symbols.getvecta.com/stencil_82/45_google-icon.d8d982f8a1.svg"
+                                style="width:20px; height: 20px; background:white; border-radius:50%;" alt=""> Sign In
+                            With
                             Google</button></a>
                 </p>
                 <p class="text-center" id="login"><a href="/auth/login"><small>Already Have Account? Login</small></a>

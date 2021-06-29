@@ -10,4 +10,11 @@ $(() => {
             }
         })
     })
+
+    $('#askTo').click(() => {
+        $('#exampleModal').modal('show')
+        $('#main').addClass('blur')
+        $('#exampleModal').addClass('open')
+    })
+
 })

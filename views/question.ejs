@@ -24,9 +24,9 @@
     </div>
     <div class="wrapper">
         <div class="questionWrapper">
-            <h4>
+            <h5>
                 <%=question.questionBody%>
-            </h4>
+            </h5>
             <button id="answerButton" class="btn btn-sm btn-outline-secondary answerButton"><i
                     class="far fa-edit"></i>Answer</button>
             <div class="answer visually-hidden text-center" id="answer/<%= question.id %>">
@@ -48,8 +48,10 @@
             </p>
             <hr>
             <% (question.answers).forEach(function(answer){ %>
-                <div class="answerWrapper">
-                    <h6><a href="/user/profile/<%= answer.userId.id%>">
+                <div class="card answerWrapper">
+                    <h6><img src="<%=answer.userId.avatar%>" alt="alt"
+                            style="height: 30px; width: 30px; border-radius: 50%;"><a
+                            href="/user/profile/<%= answer.userId.id%>">
                             <%= answer.userId.name %>
                         </a></h6>
                     <p class="otherAnswers">
