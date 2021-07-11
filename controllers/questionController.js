@@ -1,5 +1,6 @@
 const Questions = require('../models/questions')
 const Users = require('../models/users')
+const { format } = require('timeago.js')
 //rendering home page
 module.exports.showHomePage = async (req, res) => {
     //most answered questions 
@@ -35,13 +36,15 @@ module.exports.showHomePage = async (req, res) => {
         if (req.user) {
             return res.render('home', {
                 user: req.user.name,
-                questions: questions
+                questions: questions,
+                format
             })
         }
         else {
             return res.render('home', {
                 user: 'Login',
-                questions: questions
+                questions: questions,
+                format
             })
         }
     }
@@ -97,17 +100,18 @@ module.exports.showQuestionById = async (req, res) => {
             .populate({
                 path: 'userId'
             })
-        console.log(question)
         if (req.user) {
             return res.render('question', {
                 user: req.user.name,
-                question: question
+                question: question,
+                format
             })
         }
         else {
             return res.render('question', {
                 user: 'Login',
-                question: question
+                question: question,
+                format
             })
         }
     }

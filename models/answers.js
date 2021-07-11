@@ -22,7 +22,11 @@ const answersSchema = new Schema({
         type: String,
         required: true,
         trim: true
-    }
+    },
+    comments: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Comments'
+    }]
 }, {
     timestamps: true
 })

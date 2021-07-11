@@ -110,6 +110,9 @@
             $(".wrapper").empty();
             $(".wrapper").append(`<%- include ('./partials/allFollowing') %>`);
         });
+        $('.answerButton').click(() => {
+            $('.answer').toggleClass('visually-hidden')
+        })
     </script>
 </body>
 

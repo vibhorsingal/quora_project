@@ -1,10 +1,10 @@
 .wrapper {
   display: flex;
   justify-content: center;
-  margin-top: 4px;
   height: fit-content;
-  margin-bottom: 15px;
+  padding-bottom: 15px;
   overflow: hidden;
+  background-color: lightslategrey;
 }
 
 .questions {
@@ -13,6 +13,7 @@
 
 #questionWrapper {
   margin-top: 12px;
+  border-radius: 10px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
 }
 
@@ -30,7 +31,16 @@
   width: 100%;
   background: rgb(223, 221, 221);
   padding: 6px;
+  display: flex;
+  border-radius: 4px;
 }
+
+.info {
+  display: flex;
+  flex-direction: column;
+  margin-left: 4px;
+}
+
 p {
   margin: 0px;
 }
@@ -82,4 +92,13 @@ span {
 .dropdown-item:active {
   background-color: lightgrey;
   color: black;
+}
+
+img {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.time {
+  font-size: 12px;
 }

@@ -1,29 +1,27 @@
 <% user.questionsAsked.forEach(function(question){ %>
     <div class="card" id="questionWrapper">
         <div class="card-body">
-            <p class="card-text mb-2">
-                <a href="/question/<%= question.id %>">
-                    <b>
-                        <%= question.questionBody %>
-                    </b>
-                </a>
-            </p>
-            <% (question.answers).forEach(function(answer){ %>
-                <h6><img src="<%=answer.userId.avatar%>" alt="alt"
-                        style="height: 20px; width: 20px; border-radius: 50%;"><a
-                        href="/user/profile/<%= answer.userId%>">
-                        <%= answer.userId.name %>
-                    </a></h6>
-                <p>
-                    <%= answer.answerBody %>
-                </p>
-                <div id="votes">
-                    <i aid="<%= answer.id %>" class="up far fa-thumbs-up"></i><span id="votes/<%=answer.id%>">
-                        <%= answer.upvotes.length-answer.downvotes.length %>
-                    </span> <i aid="<%= answer.id %>" class="down far fa-thumbs-down"></i>
+            <h6 class="questionBody">
+                <%=question.questionBody %>
+            </h6>
+            <button id="answerButton" class="btn btn-sm btn-outline-secondary answerButton"><i
+                    class="far fa-edit"></i>Answer</button>
+            <div class="answer visually-hidden text-center">
+                <div class="card" id="answerWrapper">
+                    <form action="/query/answer" method="POST">
+                        <div class="mb-1">
+                            <textarea name="ansBody" class="body" rows="3" required></textarea>
+                        </div>
+                        <input type="text" value="<%= question.id %>" class="qid visually-hidden">
+                        <div class="mb-1">
+                            <button id="post" class="btn btn-outline-warning btn-sm">Post</button>
+                        </div>
+                    </form>
                 </div>
-
-                <% }); %>
+            </div>
+            <p>
+                <%=question.answers.length%> answers
+            </p>
 
         </div>
     </div>

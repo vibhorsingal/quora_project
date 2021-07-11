@@ -31,6 +31,34 @@ module.exports.answerQuestion = async (req, res) => {
 
 }
 
+//answering a question
+module.exports.answerAQuestion = async (req, res) => {
+    try {
+        const answer = new Answers({
+            userId: req.user.id,
+            questionId: req.params.qid,
+            answerBody: req.body.ansBody
+        })
+        await answer.save()
+        //updating question array
+        var question = await Questions.findById(req.params.qid)
+        question.answers.push(answer.id)
+        await question.save()
+        //updating user answers
+        var user = await Users.findById(req.user.id)
+        user.answers.push(answer)
+        await user.save()
+        // console.log(user,question,answer)
+        const newAnswer = await Answers.findById(answer.id).populate('userId')
+        req.flash('answer', 'Your Answer posted successfully')
+        res.send(newAnswer)
+    }
+    catch (err) {
+        console.log(err)
+        req.flash('answer', err.message)
+    }
+}
+
 module.exports.upvotingController = async (req, res) => {
     try {
         if (req.user) {

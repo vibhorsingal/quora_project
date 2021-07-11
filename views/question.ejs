@@ -8,6 +8,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
         crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.2.1.js" crossorigin="anonymous"></script>
@@ -29,49 +31,62 @@
             </h5>
             <button id="answerButton" class="btn btn-sm btn-outline-secondary answerButton"><i
                     class="far fa-edit"></i>Answer</button>
-            <div class="answer visually-hidden text-center" id="answer/<%= question.id %>">
+            <div class="answer visually-hidden text-center">
                 <div class="card" id="answerWrapper">
-                    <form action="/query/answer" method="POST">
-                        <div class="mb-1">
-                            <textarea name="ansBody" class="body" rows="3" required></textarea>
-                        </div>
-                        <input type="text" name="postId" value="<%= question.id %>" class="visually-hidden">
-                        <div class="mb-1">
-                            <button id="post" class="btn btn-outline-warning btn-sm" type="submit">Post</button>
-                        </div>
-                    </form>
+                    <div class="mb-1">
+                        <textarea class="body" rows="3" required></textarea>
+                    </div>
+                    <input type="text" value="<%= question.id %>" class="aid visually-hidden">
+                    <div class="mb-1">
+                        <button id="post" class="btn btn-outline-warning btn-sm">Post</button>
+                    </div>
                 </div>
             </div>
             <hr>
-            <p>
-                <%=question.answers.length %> Answers
-            </p>
+            <b>
+                <p class="answersLength ">
+                    <%=question.answers.length %> Answers
+                </p>
+            </b>
             <hr>
-            <% (question.answers).forEach(function(answer){ %>
-                <div class="card answerWrapper">
-                    <h6><img src="<%=answer.userId.avatar%>" alt="alt"
-                            style="height: 30px; width: 30px; border-radius: 50%;"><a
-                            href="/user/profile/<%= answer.userId.id%>">
-                            <%= answer.userId.name %>
-                        </a></h6>
-                    <p class="otherAnswers">
-                        <%= answer.answerBody %>
-                    </p>
-                    <div id="votes">
-                        <i aid="<%= answer.id %>" class="up far fa-thumbs-up"></i>
-                        <span id="votes/<%=answer.id%>">
-                            <%= answer.upvotes.length-answer.downvotes.length %>
-                        </span>
-                        <i aid="<%= answer.id %>" class="down far fa-thumbs-down"></i>
-                    </div>
+            <ul class="ul" style="list-style: none;">
+                <% (question.answers).forEach(function(answer){ %>
+                    <li>
+                        <div class="card answerWrapper">
+                            <div class="title"><img src="<%= answer.userId.avatar %>" alt="avatar"
+                                    style="height: 30px; width: 30px; border-radius: 50%; margin-right: 2px;">
+                                <div class="info">
+                                    <a href="/user/profile/<%=answer.userId.id%>">
+                                        <b>
+                                            <%= answer.userId.name %>
+                                        </b>
+                                    </a>
+                                    <span class="time">
+                                        <%= format(question.createdAt) %>
+                                    </span>
+                                </div>
+                            </div>
+                            <p class="otherAnswers">
+                                <%= answer.answerBody %>
+                            </p>
+                            <div id="votes">
+                                <i aid="<%= answer.id %>" class="up far fa-thumbs-up"></i>
+                                <span id="votes/<%=answer.id%>">
+                                    <%= answer.upvotes.length-answer.downvotes.length %>
+                                </span>
+                                <i aid="<%= answer.id %>" class="down far fa-thumbs-down"></i>
+                            </div>
 
-                </div>
-                <% }); %>
+                        </div>
+                    </li>
+                    <% }); %>
+            </ul>
         </div>
 
     </div>
 
     <script>
+
         if ('<%=user%>' === "Login") {
             $('#navbar .navbar .dropdown').append(`
                 <a class='btn btn-secondary' href='/auth/login'>Login</a>
