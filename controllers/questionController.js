@@ -36,6 +36,7 @@ module.exports.showHomePage = async (req, res) => {
         if (req.user) {
             return res.render('home', {
                 user: req.user.name,
+                id: req.user.id,
                 questions: questions,
                 format
             })
@@ -103,6 +104,7 @@ module.exports.showQuestionById = async (req, res) => {
         if (req.user) {
             return res.render('question', {
                 user: req.user.name,
+                id: req.user.id,
                 question: question,
                 format
             })

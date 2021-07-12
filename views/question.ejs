@@ -69,13 +69,36 @@
                             <p class="otherAnswers">
                                 <%= answer.answerBody %>
                             </p>
-                            <div id="votes">
-                                <i aid="<%= answer.id %>" class="up far fa-thumbs-up"></i>
-                                <span id="votes/<%=answer.id%>">
-                                    <%= answer.upvotes.length-answer.downvotes.length %>
-                                </span>
-                                <i aid="<%= answer.id %>" class="down far fa-thumbs-down"></i>
-                            </div>
+                            <% if(user=="Login" ){ %>
+                                <div id="votes">
+                                    <i aid="<%= answer.id %>" class="up far fa-thumbs-up"></i><span
+                                        id="votes/<%=answer.id%>">
+                                        <%= answer.upvotes.length-answer.downvotes.length %>
+                                    </span> <i aid="<%= answer.id %>" class="down far fa-thumbs-down"></i>
+                                </div>
+                                <% } else{ %>
+
+                                    <div id="votes">
+                                        <% if(answer.upvotes.includes(id)){ %>
+                                            <i aid="<%= answer.id %>" class="up fas fa-thumbs-up"></i>
+                                            <% } else{ %>
+                                                <i aid="<%= answer.id %>" class="up far fa-thumbs-up"></i>
+                                                <% } %>
+                                                    <span id="votes/<%=answer.id%>">
+                                                        <%= answer.upvotes.length-answer.downvotes.length %>
+                                                    </span>
+                                                    <% if(answer.downvotes.includes(id)){ %>
+                                                        <i aid="<%= answer.id %>" class="down fas fa-thumbs-down"></i>
+                                                        <% } else{ %>
+                                                            <i aid="<%= answer.id %>"
+                                                                class="down far fa-thumbs-down"></i>
+                                                            <% } %>
+
+                                    </div>
+
+
+
+                                    <% } %>
 
                         </div>
                     </li>

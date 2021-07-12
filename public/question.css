@@ -93,3 +93,8 @@ img {
   border-radius: 4px;
   margin-bottom: 5px;
 }
+
+.dropdown-item:active {
+  background-color: lightgrey;
+  color: black;
+}

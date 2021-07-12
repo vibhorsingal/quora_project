@@ -48,7 +48,20 @@ $(() => {
         $.get(`/answer/upvote/${aid}`, (res) => {
             if (res) {
                 var span = document.getElementById(`votes/${aid}`)
+                const downButton = $(`[aid='${aid}']`)
                 span.innerText = res.upvotes.length - res.downvotes.length
+                if (downButton[1].classList.contains('fas')) {
+                    downButton[1].classList.remove('fas')
+                    downButton[1].classList.add('far')
+                }
+                if (e.target.classList.contains("far")) {
+                    e.target.classList.remove('far')
+                    e.target.classList.add('fas')
+                }
+                else {
+                    e.target.classList.remove('fas')
+                    e.target.classList.add('far')
+                }
             }
             else {
                 location.href = '/auth/login'
@@ -64,6 +77,21 @@ $(() => {
             if (res) {
                 var span = document.getElementById(`votes/${aid}`)
                 span.innerText = res.upvotes.length - res.downvotes.length
+                const upButton = $(`[aid='${aid}']`)
+                span.innerText = res.upvotes.length - res.downvotes.length
+                if (upButton[0].classList.contains('fas')) {
+                    upButton[0].classList.remove('fas')
+                    upButton[0].classList.add('far')
+                }
+                if (e.target.classList.contains("far")) {
+                    e.target.classList.remove('far')
+                    e.target.classList.add('fas')
+                }
+                else {
+
+                    e.target.classList.remove('fas')
+                    e.target.classList.add('far')
+                }
             }
             else {
                 location.href = '/auth/login'

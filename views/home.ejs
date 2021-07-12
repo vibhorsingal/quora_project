@@ -14,6 +14,8 @@
         integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.2.1.js" crossorigin="anonymous"></script>
     <script src="/scripts/home.js"></script>
+    <script src="/scripts/chats.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.3/socket.io.js"></script>
     <link rel="stylesheet" href="/home.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
         integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
@@ -68,15 +70,39 @@
                             <p class="otherAnswers" style="font-size: medium;">
                                 <%= answer.answerBody %>
                             </p>
+                            <% if(user=="Login" ){ %>
+                                <div id="votes">
+                                    <i aid="<%= answer.id %>" class="up far fa-thumbs-up"></i><span
+                                        id="votes/<%=answer.id%>">
+                                        <%= answer.upvotes.length-answer.downvotes.length %>
+                                    </span> <i aid="<%= answer.id %>" class="down far fa-thumbs-down"></i>
+                                </div>
+                                <% } else{ %>
 
-                            <div id="votes">
-                                <i aid="<%= answer.id %>" class="up far fa-thumbs-up"></i><span
-                                    id="votes/<%=answer.id%>">
-                                    <%= answer.upvotes.length-answer.downvotes.length %>
-                                </span> <i aid="<%= answer.id %>" class="down far fa-thumbs-down"></i>
-                            </div>
+                                    <div id="votes">
+                                        <% if(answer.upvotes.includes(id)){ %>
+                                            <i aid="<%= answer.id %>" class="up fas fa-thumbs-up"></i>
+                                            <% } else{ %>
+                                                <i aid="<%= answer.id %>" class="up far fa-thumbs-up"></i>
+                                                <% } %>
+                                                    <span id="votes/<%=answer.id%>">
+                                                        <%= answer.upvotes.length-answer.downvotes.length %>
+                                                    </span>
+                                                    <% if(answer.downvotes.includes(id)){ %>
+                                                        <i aid="<%= answer.id %>" class="down fas fa-thumbs-down"></i>
+                                                        <% } else{ %>
+                                                            <i aid="<%= answer.id %>"
+                                                                class="down far fa-thumbs-down"></i>
+                                                            <% } %>
 
-                            <% }); %>
+                                    </div>
+
+
+
+                                    <% } %>
+
+
+                                        <% }); %>
                     </div>
                 </div>
                 <% }); %>
