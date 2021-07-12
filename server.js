@@ -18,12 +18,6 @@ app.use(session({
         maxAge: 24 * 60 * 60 * 1000
     }
 }))
-
-const chatServer = require('http').Server(app)
-const chatSockets = require('./config/chat_engine').chatSockets(chatServer)
-chatServer.listen(8000)
-console.log('chat server is listening on port 5000')
-
 //passport 
 const passport = require('passport')
 const passportLocal = require('./config/passport_local')
@@ -51,7 +45,7 @@ app.use('/auth', authRoute)
 app.use('/', questionsRoute)
 app.use('/user', profileRoute)
 //server listening on port 5000
-const PORT = process.env.PORT
-app.listen(PORT || 5000, () => {
+const PORT = process.env.PORT || 5000
+app.listen(PORT, () => {
     console.log(`server started at http://localhost:${PORT}`)
 })
