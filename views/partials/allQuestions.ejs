@@ -2,7 +2,8 @@
     <div class="card" id="questionWrapper">
         <div class="card-body">
             <h6 class="questionBody">
-                <%=question.questionBody %>
+                <a href="/question/<%= question.id %>">
+                    <%=question.questionBody %>
             </h6>
             <button id="answerButton" class="btn btn-sm btn-outline-secondary answerButton"><i
                     class="far fa-edit"></i>Answer</button>

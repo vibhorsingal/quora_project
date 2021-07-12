@@ -8,7 +8,7 @@ const session = require('express-session')
 const flash = require('connect-flash')
 
 const MongoStore = require('connect-mongo')
-const store = MongoStore.create({ mongoUrl: process.env.MONGO_URL, collectionName: 'sessions' })
+const store = MongoStore.create({ mongoUrl: process.env.MONGODB_UR || process.env.MONGO_URL, collectionName: 'sessions' })
 app.use(session({
     secret: process.env.SECRET,
     resave: false,
@@ -51,6 +51,7 @@ app.use('/auth', authRoute)
 app.use('/', questionsRoute)
 app.use('/user', profileRoute)
 //server listening on port 5000
-app.listen(5000, () => {
-    console.log(`server started at http://localhost:5000`)
+const PORT = process.env.PORT
+app.listen(PORT || 5000, () => {
+    console.log(`server started at http://localhost:${PORT}`)
 })
