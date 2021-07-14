@@ -6,7 +6,7 @@ require('../config/passport_local')
 require('../config/passport_google')
 
 //controllers 
-const { getLoginPage, logout } = require('../controllers/loginControllers')
+const { getLoginPage, logout, forgotPassword, sendOtp, confirmOtp, resetPassword } = require('../controllers/loginControllers')
 const { getRegisterPage, registerController } = require('../controllers/registerControllers')
 
 //routes for local login
@@ -33,6 +33,18 @@ route.get('/google/redirect',
     // Successful authentication, redirect home.
     res.redirect('/');
   });
+
+//forgot password route
+route.get('/forgot', forgotPassword)
+
+//send OTP
+route.post('/sendOtp', sendOtp)
+
+//confirm OTP
+route.post('/confirmOtp', confirmOtp)
+
+//reset password
+route.post('/reset', resetPassword)
 
 //logout route
 route.get('/logout', logout)

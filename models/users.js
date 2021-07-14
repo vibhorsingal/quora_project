@@ -55,7 +55,11 @@ const userSchema = new Schema({
     downVotes: [{
         type: Schema.Types.ObjectId,
         ref: 'Vote'
-    }]
+    }],
+    otp: {
+        type: Number,
+        default: 0
+    }
 
 }, {
     timestamps: true
