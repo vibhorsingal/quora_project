@@ -8,7 +8,8 @@ const session = require('express-session')
 const flash = require('connect-flash')
 
 const MongoStore = require('connect-mongo')
-const store = MongoStore.create({ mongoUrl: process.env.MONGO_URL, collectionName: 'sessions' })
+const url = process.env.MONGODB_URI || process.env.MONGO_URL
+const store = MongoStore.create({ mongoUrl: url, collectionName: 'sessions' })
 app.use(session({
     secret: process.env.SECRET,
     resave: false,
